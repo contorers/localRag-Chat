@@ -1,0 +1,20 @@
+:root {
+  /* 覆盖 Element Plus 的主要颜色 */
+  --el-color-primary: #565656; /* 示例：改成一个绿色 */
+
+  /* 您把所有颜色都设为 #cacaca (灰色)，
+    这会导致 hover 背景和字体颜色一样，
+    看起来像是“失效”了。
+    
+    试试下面这个绿色主题：
+  */
+  --el-color-primary-light-3: #55cfae;
+  --el-color-primary-light-5: #80ddc8;
+  --el-color-primary-light-7: #aadfeb;
+  --el-color-primary-light-8: #c5e7e2;
+  --el-color-primary-light-9: #e0f2ef; /* 这个用于 hover 的背景色 */
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}

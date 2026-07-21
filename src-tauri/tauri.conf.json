@@ -1,0 +1,64 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "LocalRAG-Chat",
+  "version": "0.1.0", 
+  "identifier": "com.cipherwhisper.localrag", 
+  "build": {
+    "frontendDist": "../dist", 
+    "devUrl": "http://localhost:1420", 
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "LocalRAG-Chat",
+        "width": 800,
+        "height": 600,
+        "decorations": true,
+        "transparent": false,
+        "visible": true,
+        "resizable": true,
+        "fullscreen": false,
+        "devtools": true
+      }
+    ],
+    "security": {
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$APPDATA/**",
+          "$APPLOCALDATA/**"
+        ]
+      },
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' asset: https: http: data:; connect-src 'self' asset: https: http:",
+      "capabilities": [
+        "default"
+      ]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    },
+    "resources": ["models/gte-small/*"],
+    "windows": {
+      "nsis": {
+        "installMode": "perMachine",
+        "languages": ["SimpChinese", "English"]
+      },
+      "webviewInstallMode": {
+      "type": "downloadBootstrapper"
+    }
+    }
+  }
+}

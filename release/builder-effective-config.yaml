@@ -1,0 +1,21 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.cipherwhisper.localrag
+productName: LocalRAG-Chat
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: LocalRAG
+  installerIcon: public/favicon.ico
+  uninstallerIcon: public/favicon.ico
+files:
+  - filter:
+      - dist/**/*
+      - dist-electron/**/*
+electronVersion: 42.0.0

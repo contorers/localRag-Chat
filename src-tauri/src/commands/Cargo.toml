@@ -1,0 +1,83 @@
+[package]
+name = "app"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+license = ""
+repository = ""
+edition = "2021"
+rust-version = "1.77.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.11.2", features = ["protocol-asset"] }
+tauri-plugin-log = "2"
+# 👇 新增的网络 TCP 与异步核心库
+tokio = { version = "1", features = ["full"] }
+bytes = "1.4"
+tokio-util = { version = "0.7", features = ["codec"] }
+futures-util = { version = "0.3", features = ["sink"] }
+tauri-plugin-stronghold = "2.3.1"
+argon2 = "0.5.3"
+tokio-rustls = "0.26.4"
+rustls = "0.23.40"
+rustls-pemfile = "2.2.0"
+rusqlite = { version = "0.40.0", features = ["bundled"] }
+tauri-plugin-dialog = "2"
+image = "0.25.6"
+zeroize = "1.6"
+p256 = { version = "0.13", features = ["ecdsa", "pem"] }
+aes-gcm = "0.10"
+rsa = "0.9"
+rand = "0.8"
+base64 = "0.21"
+sha2 = "0.10"
+# =======================================================
+# 🚀 必须加在最底部！让底层加密库性能飞起，把 1 分钟缩短到 0.1 秒
+# =======================================================
+[profile.dev]
+opt-level = 0
+
+[profile.dev.package."*"]
+opt-level = 3
+
+#==============================================rag==============================================
+
+[package]
+name = "wasm_vector_db"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.87"
+js-sys = "0.3.64"
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+
+#==============================================测试==============================================
+criterion = "0.5"
+
+[[bench]]
+name = "crypto_bench"
+path = "benches/crypto_bench.rs" # 显式告诉 Cargo 文件在哪里
+harness = false
+
+[dev-dependencies]
+criterion = "0.5.1"
+rand_core = "0.9.5"
+rsa = { version = "0.9", features = ["sha2"] }
+sha2 = "0.10"
